@@ -1,6 +1,7 @@
 package com.carledwinti.soap.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,8 +19,8 @@ import com.carledwinti.soap.client.SoapConnector;
 @RequestMapping("/notes")
 public class NoteController {
 
-	//@Value("${uri.ws.notes}")
-	private String uri = "http://localhost:8082/ws/notesWS";
+	@Value("${uri.ws.notes}")
+	private String uri;
 	
 	@Autowired
 	private SoapConnector soapConnector;

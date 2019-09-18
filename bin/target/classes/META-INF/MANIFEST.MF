@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: pj-springboot-soap-client
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: sdp5887
+Implementation-Vendor-Id: com.carledwinti.springboot.webservice.soap
+Build-Jdk: 1.8.0_112
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/pj-springboot-soap-client
+Created-By: Maven Integration for Eclipse
+

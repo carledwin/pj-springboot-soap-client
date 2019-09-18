@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://carledwinti.com/notes" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://carledwinti.com/notes" targetNamespace="http://carledwinti.com/notes">
+  <wsdl:types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://carledwinti.com/notes">
+	
+	<xs:element name="GetNotesRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="tns:User"/>
+			</xs:sequence>	
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="GetNotesResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="tns:Note"/>
+				<xs:element ref="tns:Fault"/>
+			</xs:sequence>	
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="User">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="age" type="xs:int"/>
+			<xs:element name="document" type="xs:long"/>
+			<xs:element name="documentType" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="Authorization">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element name="username" type="xs:string"/>
+			<xs:element name="password" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	</xs:element>
+
+<xs:element name="Note">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element name="description" type="xs:string"/>
+			<xs:element name="value" type="xs:int"/>
+			<xs:element ref="tns:User"/>
+		</xs:sequence>
+	</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="Fault">
+		<xs:complexType>
+		<xs:sequence>
+			<xs:element name="message" type="xs:string"/>
+			<xs:element name="code" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>	
+	</xs:element>	
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="GetNotesRequest">
+    <wsdl:part element="tns:GetNotesRequest" name="GetNotesRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetNotesResponse">
+    <wsdl:part element="tns:GetNotesResponse" name="GetNotesResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="Fault">
+    <wsdl:part element="tns:Fault" name="Fault">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="NotePort">
+    <wsdl:operation name="GetNotes">
+      <wsdl:input message="tns:GetNotesRequest" name="GetNotesRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetNotesResponse" name="GetNotesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NotePortSoap11" type="tns:NotePort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetNotes">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetNotesRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetNotesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="NotePortService">
+    <wsdl:port binding="tns:NotePortSoap11" name="NotePortSoap11">
+      <soap:address location="http://localhost:8082/ws"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
